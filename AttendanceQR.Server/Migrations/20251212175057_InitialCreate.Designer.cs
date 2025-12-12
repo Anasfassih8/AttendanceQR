@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AttendanceQR.Server.Migrations
 {
     [DbContext(typeof(AttendanceDbContext))]
-    [Migration("20251208142626_InitialCreate")]
+    [Migration("20251212175057_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -95,7 +95,7 @@ namespace AttendanceQR.Server.Migrations
             modelBuilder.Entity("AttendanceQR.Server.Models.AttendanceRecord", b =>
                 {
                     b.HasOne("AttendanceQR.Server.Models.QRCode", "QRCode")
-                        .WithMany()
+                        .WithMany("AttendanceRecords")
                         .HasForeignKey("QRCodeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -109,6 +109,11 @@ namespace AttendanceQR.Server.Migrations
                     b.Navigation("QRCode");
 
                     b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("AttendanceQR.Server.Models.QRCode", b =>
+                {
+                    b.Navigation("AttendanceRecords");
                 });
 #pragma warning restore 612, 618
         }

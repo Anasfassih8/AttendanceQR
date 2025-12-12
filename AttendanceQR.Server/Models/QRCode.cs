@@ -6,6 +6,6 @@
         public string Data { get; set; }
         public DateTime Expiration { get; set; }
 
-      
+        public ICollection<AttendanceRecord> AttendanceRecords { get; set; }
     }
 }
